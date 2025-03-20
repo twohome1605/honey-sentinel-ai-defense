@@ -4,10 +4,12 @@ import { AlertTriangle, Filter, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { attacks } from "@/lib/mockData";
+import { toast } from "sonner";
 
 const AttackLogs: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("all");
+  const [selectedAttack, setSelectedAttack] = useState<number | null>(null);
 
   const filteredAttacks = attacks.filter(attack => {
     const matchesSearch = 
@@ -36,6 +38,17 @@ const AttackLogs: React.FC = () => {
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit'
+    });
+  };
+
+  const handleViewDetails = (attackId: number) => {
+    setSelectedAttack(attackId);
+    toast.info(`Viewing details for attack #${attackId}`, {
+      description: "Full attack information would be displayed here",
+      action: {
+        label: "Close",
+        onClick: () => setSelectedAttack(null)
+      }
     });
   };
 
@@ -98,7 +111,12 @@ const AttackLogs: React.FC = () => {
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <Button variant="outline" size="sm" className="h-7 px-2 text-xs border-white/10 hover:bg-white/10 hover:text-honeypot-text-primary">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="h-7 px-2 text-xs border-white/10 hover:bg-white/10 hover:text-honeypot-text-primary"
+                    onClick={() => handleViewDetails(attack.id)}
+                  >
                     Details
                   </Button>
                 </td>
