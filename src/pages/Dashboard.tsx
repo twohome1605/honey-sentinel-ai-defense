@@ -7,11 +7,13 @@ import AdaptiveSecurity from "@/components/AdaptiveSecurity";
 import LoggingActivities from "@/components/LoggingActivities";
 import AlertNotifications from "@/components/AlertNotifications";
 import { Shield } from "lucide-react";
+import { Toaster } from "sonner";
 
 const Dashboard: React.FC = () => {
   return (
     <div className="min-h-screen bg-honeypot-bg-dark pb-24 lg:pb-6 lg:pt-16">
       <NavBar />
+      <Toaster position="top-right" />
       
       <div className="container mx-auto px-4 py-6">
         <header className="flex items-center justify-between mb-8">

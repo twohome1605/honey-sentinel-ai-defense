@@ -3,9 +3,30 @@ import React from "react";
 import { Bell, ShieldAlert, Shield } from "lucide-react";
 import CircularProgress from "./CircularProgress";
 import { alertLevels } from "@/lib/mockData";
+import { toast } from "sonner";
 
 const AlertNotifications: React.FC = () => {
   const totalAlerts = alertLevels.reduce((sum, level) => sum + level.count, 0);
+  
+  const handleViewAll = () => {
+    toast.info("Navigating to all security alerts");
+  };
+
+  const handleAcknowledgeAll = () => {
+    toast.success("All alerts have been acknowledged");
+  };
+
+  const handleInvestigate = () => {
+    toast.info("Investigating brute force attack...", {
+      description: "Threat details displayed in security console"
+    });
+  };
+
+  const handleBlockIP = () => {
+    toast.success("IP 198.51.100.23 has been blocked", {
+      description: "Added to firewall block list"
+    });
+  };
   
   return (
     <div className="glass-card rounded-xl p-6 animate-slide-up">
@@ -14,7 +35,10 @@ const AlertNotifications: React.FC = () => {
           <ShieldAlert className="w-5 h-5 mr-2 text-honeypot-accent-pink" />
           Security Alerts
         </h2>
-        <button className="bg-honeypot-accent-blue/20 text-honeypot-accent-blue text-xs px-3 py-1.5 rounded-full border border-honeypot-accent-blue/30 flex items-center">
+        <button 
+          onClick={handleViewAll}
+          className="bg-honeypot-accent-blue/20 text-honeypot-accent-blue text-xs px-3 py-1.5 rounded-full border border-honeypot-accent-blue/30 flex items-center"
+        >
           <Bell className="w-3.5 h-3.5 mr-1.5" />
           View All
         </button>
@@ -45,7 +69,10 @@ const AlertNotifications: React.FC = () => {
               ))}
             </ul>
             
-            <button className="w-full mt-4 bg-white/10 hover:bg-white/15 text-honeypot-text-primary py-2 rounded-lg text-sm transition-colors">
+            <button 
+              onClick={handleAcknowledgeAll}
+              className="w-full mt-4 bg-white/10 hover:bg-white/15 text-honeypot-text-primary py-2 rounded-lg text-sm transition-colors"
+            >
               Acknowledge All
             </button>
           </div>
@@ -74,10 +101,16 @@ const AlertNotifications: React.FC = () => {
             </div>
             
             <div className="grid grid-cols-2 gap-4">
-              <button className="bg-white/10 hover:bg-white/15 text-honeypot-text-primary py-2 rounded-lg text-sm transition-colors">
+              <button 
+                onClick={handleInvestigate}
+                className="bg-white/10 hover:bg-white/15 text-honeypot-text-primary py-2 rounded-lg text-sm transition-colors"
+              >
                 Investigate
               </button>
-              <button className="bg-honeypot-accent-pink/20 hover:bg-honeypot-accent-pink/30 text-honeypot-accent-pink border border-honeypot-accent-pink/30 py-2 rounded-lg text-sm transition-colors">
+              <button 
+                onClick={handleBlockIP}
+                className="bg-honeypot-accent-pink/20 hover:bg-honeypot-accent-pink/30 text-honeypot-accent-pink border border-honeypot-accent-pink/30 py-2 rounded-lg text-sm transition-colors"
+              >
                 Block IP
               </button>
             </div>
