@@ -39,6 +39,7 @@ const NavBar: React.FC = () => {
                         ? "text-honeypot-accent-pink" 
                         : "text-honeypot-text-secondary hover:text-honeypot-text-primary"
                     }`}
+                    onClick={() => window.scrollTo(0, 0)}
                   >
                     <span className="lg:mr-2">{item.icon}</span>
                     <span className="text-xs mt-1 lg:mt-0 lg:text-sm">{item.label}</span>

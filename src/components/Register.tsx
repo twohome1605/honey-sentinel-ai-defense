@@ -1,14 +1,16 @@
 
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Shield, Lock, User } from "lucide-react";
+import { Shield, Lock, User, Mail, Key } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -16,10 +18,19 @@ const Login: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!username || !password) {
+    if (!username || !email || !password || !confirmPassword) {
       toast({
         title: "Validation Error",
-        description: "Please enter both username and password",
+        description: "Please fill in all fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      toast({
+        title: "Password Mismatch",
+        description: "Passwords do not match",
         variant: "destructive",
       });
       return;
@@ -27,23 +38,14 @@ const Login: React.FC = () => {
     
     setIsLoading(true);
     
-    // Simulate authentication (in a real app, this would call an API)
+    // Simulate registration (in a real app, this would call an API)
     setTimeout(() => {
-      // Mock successful authentication
-      if (username === "admin" && password === "password") {
-        toast({
-          title: "Authentication Successful",
-          description: "Welcome to Sentinel AI Defense System",
-        });
-        navigate("/dashboard");
-      } else {
-        toast({
-          title: "Authentication Failed",
-          description: "Invalid username or password",
-          variant: "destructive",
-        });
-        setIsLoading(false);
-      }
+      toast({
+        title: "Registration Successful",
+        description: "Welcome to Sentinel AI Defense System",
+      });
+      navigate("/dashboard");
+      setIsLoading(false);
     }, 1500);
   };
 
@@ -58,10 +60,10 @@ const Login: React.FC = () => {
             <span className="text-honeypot-accent-blue">Sentinel</span>
             <span className="text-honeypot-accent-pink">AI</span>
           </h1>
-          <p className="text-honeypot-text-secondary mt-2">Honeypot Defense System</p>
+          <p className="text-honeypot-text-secondary mt-2">Create Your Account</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-4">
             <div className="relative">
               <User className="absolute left-3 top-3 h-5 w-5 text-honeypot-text-secondary" />
@@ -74,12 +76,32 @@ const Login: React.FC = () => {
               />
             </div>
             <div className="relative">
+              <Mail className="absolute left-3 top-3 h-5 w-5 text-honeypot-text-secondary" />
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="pl-10 bg-honeypot-bg-dark/50 border-white/10 h-12"
+              />
+            </div>
+            <div className="relative">
               <Lock className="absolute left-3 top-3 h-5 w-5 text-honeypot-text-secondary" />
               <Input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className="pl-10 bg-honeypot-bg-dark/50 border-white/10 h-12"
+              />
+            </div>
+            <div className="relative">
+              <Key className="absolute left-3 top-3 h-5 w-5 text-honeypot-text-secondary" />
+              <Input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 className="pl-10 bg-honeypot-bg-dark/50 border-white/10 h-12"
               />
             </div>
@@ -97,26 +119,22 @@ const Login: React.FC = () => {
                 <div className="h-2 w-2 rounded-full bg-black mx-1"></div>
               </div>
             ) : (
-              "Login to System"
+              "Create Account"
             )}
           </Button>
           
           <div className="text-center text-sm">
             <span className="text-honeypot-text-secondary">
-              Don't have an account?{" "}
-              <Link to="/register" className="text-honeypot-accent-blue hover:underline">
-                Register
+              Already have an account?{" "}
+              <Link to="/" className="text-honeypot-accent-blue hover:underline">
+                Sign In
               </Link>
             </span>
           </div>
         </form>
-
-        <div className="mt-6 text-center text-xs text-honeypot-text-secondary">
-          <p>Use demo credentials: admin / password</p>
-        </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;
