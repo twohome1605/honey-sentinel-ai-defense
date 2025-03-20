@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Database, BarChart } from "lucide-react";
+import { Database, BarChart as BarChartIcon } from "lucide-react";
 import BarChart from "./BarChart";
 import { weeklyAttackData, logs } from "@/lib/mockData";
 
@@ -24,7 +24,7 @@ const LoggingActivities: React.FC = () => {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-slide-up">
       <div className="glass-card rounded-xl p-6">
         <h2 className="text-xl font-semibold flex items-center mb-6">
-          <BarChart className="w-5 h-5 mr-2 text-honeypot-accent-blue" />
+          <BarChartIcon className="w-5 h-5 mr-2 text-honeypot-accent-blue" />
           Activity Trends
         </h2>
 
