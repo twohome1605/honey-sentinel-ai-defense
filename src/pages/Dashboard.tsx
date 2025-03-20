@@ -20,7 +20,7 @@ const Dashboard: React.FC = () => {
               <Shield className="h-6 w-6 text-honeypot-accent-blue" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold">Sentinel Defense Dashboard</h1>
+              <h1 className="text-2xl font-bold">Honeypot Defense Dashboard</h1>
               <p className="text-honeypot-text-secondary text-sm">
                 Honeypot Monitoring System
               </p>

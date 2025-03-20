@@ -33,7 +33,7 @@ const Login: React.FC = () => {
       if (username === "admin" && password === "password") {
         toast({
           title: "Authentication Successful",
-          description: "Welcome to Sentinel AI Defense System",
+          description: "Welcome to Honeypot Defense System",
         });
         navigate("/dashboard");
       } else {
@@ -55,8 +55,8 @@ const Login: React.FC = () => {
             <Shield className="h-12 w-12 text-honeypot-accent-blue animate-pulse-slow" />
           </div>
           <h1 className="text-3xl font-bold">
-            <span className="text-honeypot-accent-blue">Sentinel</span>
-            <span className="text-honeypot-accent-pink">AI</span>
+            <span className="text-honeypot-accent-blue">Honey</span>
+            <span className="text-honeypot-accent-pink">pot</span>
           </h1>
           <p className="text-honeypot-text-secondary mt-2">Honeypot Defense System</p>
         </div>

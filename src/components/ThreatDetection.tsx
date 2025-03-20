@@ -4,9 +4,39 @@ import { AlertOctagon, AlertTriangle, Shield } from "lucide-react";
 import CircularProgress from "./CircularProgress";
 import HexagonChart from "./HexagonChart";
 import { threatMetrics, hexagonData } from "@/lib/mockData";
+import { useToast } from "@/hooks/use-toast";
 
 const ThreatDetection: React.FC = () => {
   const { currentThreatLevel, averageSeverity, activeThreats, blockedAttacks } = threatMetrics;
+  const { toast } = useToast();
+
+  const handleAnalyze = () => {
+    toast({
+      title: "Analysis Started",
+      description: "Analyzing current threat patterns and behaviors",
+    });
+  };
+
+  const handleRespond = () => {
+    toast({
+      title: "Response Initiated",
+      description: "Automated response to detected threats in progress",
+    });
+  };
+
+  const handleMitigate = () => {
+    toast({
+      title: "Mitigation in Progress",
+      description: "Applying mitigation strategies to reduce threat impact",
+    });
+  };
+
+  const handleReport = () => {
+    toast({
+      title: "Report Generated",
+      description: "Comprehensive threat report has been generated",
+    });
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-slide-up">
@@ -57,16 +87,24 @@ const ThreatDetection: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-4 mt-6">
-          <button className="bg-honeypot-accent-mint/20 hover:bg-honeypot-accent-mint/30 text-honeypot-accent-mint border border-honeypot-accent-mint/30 rounded-lg py-2 transition-colors">
+          <button 
+            onClick={handleAnalyze}
+            className="bg-honeypot-accent-mint/20 hover:bg-honeypot-accent-mint/30 text-honeypot-accent-mint border border-honeypot-accent-mint/30 rounded-lg py-2 transition-colors">
             Analyze
           </button>
-          <button className="bg-honeypot-accent-pink/20 hover:bg-honeypot-accent-pink/30 text-honeypot-accent-pink border border-honeypot-accent-pink/30 rounded-lg py-2 transition-colors">
+          <button 
+            onClick={handleRespond}
+            className="bg-honeypot-accent-pink/20 hover:bg-honeypot-accent-pink/30 text-honeypot-accent-pink border border-honeypot-accent-pink/30 rounded-lg py-2 transition-colors">
             Respond
           </button>
-          <button className="bg-white/5 hover:bg-white/10 text-honeypot-text-primary border border-white/10 rounded-lg py-2 transition-colors">
+          <button 
+            onClick={handleMitigate}
+            className="bg-white/5 hover:bg-white/10 text-honeypot-text-primary border border-white/10 rounded-lg py-2 transition-colors">
             Mitigate
           </button>
-          <button className="bg-white/5 hover:bg-white/10 text-honeypot-text-primary border border-white/10 rounded-lg py-2 transition-colors">
+          <button 
+            onClick={handleReport}
+            className="bg-white/5 hover:bg-white/10 text-honeypot-text-primary border border-white/10 rounded-lg py-2 transition-colors">
             Report
           </button>
         </div>
